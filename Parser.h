@@ -11,14 +11,20 @@
 
 class FunctionNotFoundExecption: std::exception {};
 
-
-std::string parseFunction(std::string line, Database database, Functions functions)
+/**
+ * Parse the given code and produce a string result.
+ * @param code The given code to parse.
+ * @param database The storage database of the running program.
+ * @param functions The functions avliable to the program.
+ * @return The result of the parsing.
+ */
+std::string parse(std::string code, Database database, Functions functions)
 {
     std::string name;
     Arguments arguments;
     bool named = false;
 
-    for(std::string::iterator it = line.begin(); it != line.end(); ++it)
+    for(std::string::iterator it = code.begin(); it != code.end(); ++it)
     {
         if(*it == ')')
             break;
@@ -46,8 +52,8 @@ std::string parseFunction(std::string line, Database database, Functions functio
                 if(*it == '(')
                 {
                     // Add the argument as the result of the function
-                    arg = parseFunction(
-                        line.substr(it - line.begin(), line.size()),
+                    arg = parse(
+                        code.substr(it - code.begin(), code.size()),
                         database,
                         functions
                     );

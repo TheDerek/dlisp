@@ -24,9 +24,6 @@ using Action = std::function<
 class Function
 {
     public:
-        // The name of the function
-        const std::string name;
-
         // The number of arguments the function takes
         const int8_t argc;
 
@@ -39,8 +36,7 @@ class Function
          * @param argc The number of agruments this function takes.
          * @param action The action this function performs when called.
          */
-        Function(std::string name, int8_t argc, Action action):
-            name(name), argc(argc), action(action) {};
+        Function(int8_t argc, Action action): argc(argc), action(action) {};
 
         /**
          * Perform this functions action.
